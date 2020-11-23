@@ -1,0 +1,198 @@
+*{
+  box-sizing: border-box;
+  font-family: Arial;
+}
+body{
+  display: flex;
+  background-image: url(image/back.jpg);
+  background-size: 100%;
+
+}
+.main{
+  position: relative;
+  left:150px;
+  top:90px;
+  overflow: hidden;
+  width: 500px;
+  height: 500px;
+}
+.score{
+  font-family: sans-serif;
+  color: #fff;
+  font-weight: 60;
+  font-size: 25px;
+  margin: 50px auto;
+  position: relative;
+  top:440px;
+  left:180px;
+  width: 200px;
+  height: 40px;
+  font-weight: 60;
+}
+.game {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: 0;
+
+}
+.excel{
+  width:50px;
+  height: 50px;
+}
+.excel0{
+  background-image: url(image/img0.png);
+  background-position: 51% 45%;
+  background-size: 460%;
+}
+.excel1{
+  background-image: url(image/img1.png);
+  background-position: 43% 42%;
+  background-size: 460%;
+}
+.excel2{
+  background-image: url(image/img2.png);
+  background-position: 49% 48%;
+  background-size: 460%;
+}
+.excel3{
+  background-image: url(image/img3.png);
+  background-position: 49% 49%;
+  background-size: 440%;
+}
+.excel4{
+  background-image: url(image/img4.png);
+  background-position: 51% 48%;
+  background-size: 460%;
+}
+.excel5{
+  background-image: url(image/img5.png);
+  background-position: 51% 42%;
+  background-size: 460%;
+}
+.excel6{
+  background-image: url(image/img6.png);
+  background-position: 49% 44%;
+  background-size: 460%;
+}
+.active{
+  border:3px solid rgb(255, 215, 0);
+}
+.excelBoom{
+  background-image: url(image/boom.png);
+  background-repeat: no-repeat;
+  background-position: 49% 44%;
+  background-size: 150%;
+}
+
+/*Таймер*/
+.timer{
+  position: relative;
+  display: block;
+  right:80px;
+  top:60px;
+  height: 100px;
+  width: 200px;
+}
+.countdown-title {
+  position: relative;
+  left: 50px;
+  color: #000;
+  font-weight: 60;
+  font-size: 30px;
+}
+
+.countdown {
+  font-family: sans-serif;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+}
+
+.countdown-number {
+  height: 100px;
+  width: 80px;
+  padding: 10px;
+  border-radius: 3px;
+  color: inherit;
+  background: #008080;
+}
+
+.countdown-time {
+  height: 50px;
+  width: 50px;
+  padding: 15px;
+  border-radius: 3px;
+  background: #000000;
+  display: inline-block;
+}
+
+.countdown-text {
+  display: block;
+  padding-top: 5px;
+  font-size: 15px;
+}
+
+
+/*Таблица*/
+table{
+  position: relative;
+  top:140px;
+  right:35px;
+}
+tr{
+  width: 100px;
+  height: 50px;
+  background: lightgrey;
+  text-align: center;
+}
+td{
+  width: 150px;
+  height: 50px;
+  background: #008080;
+  color: #fff;
+  text-align: center;
+  border: 4px solid black;
+  font-size: 20px;
+}
+.table-title {
+  position: relative;
+  left:90px;
+  top:60px;
+  color: #000;
+  font-weight: 60;
+  font-size: 30px;
+}
+/* ФОН ДО НАЧАЛА ИГРЫ */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: #1e488c;
+}
+/* КНОПКА START */
+#button{
+  position: relative;
+  top:250px;
+  right: 530px;
+  border: 2px solid #1e488c;
+  width: 300px;
+  height: 100px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 30px 0;
+  cursor: pointer;
+  font-size: 25px;
+  transition: all .3s;
+  background-color: grey;
+  z-index:2;
+}
+#button:hover{
+  border-radius: 40px;
+}
