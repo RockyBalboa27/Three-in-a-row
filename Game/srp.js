@@ -1,11 +1,19 @@
 var overlay;
 var time=60;
 var s;
+var audio;
+audio = new Audio();
+audio.src = 'music/game.mp3';
+var audioTimer;
+var audioScore;
 button.onclick = function start(){
   overlay = document.querySelector('.overlay');
   button.style.display='none';
   overlay.style.display='none';
   s=0;
+  audio.play();
+  audio.volume = 0.3;
+  audio.loop = true;
   startGame();
 };
 
@@ -97,7 +105,7 @@ function startGame(){
       for(var y=0;y<blockRows;y++) {
         for (var x=0;x<blockCols;x++) {
           // ПРОВЕРКА ПО СТРОКЕ
-          if (x <= blockCols - 3) {
+          if (x <= blockCols-3) {
             count = 1;
             arr = [[x, y]];
             // ПОИСК БЛОКА ПО АТТРИБУТАМ
@@ -122,7 +130,7 @@ function startGame(){
             }
           }
           // ПРОВЕРКА ПО СТОЛБЦУ
-          if (y <= blockRows - 3) {
+          if (y <= blockRows-3) {
             count = 1;
             arr = [[x, y]];
             // ПОИСК БЛОКА ПО АТТРИБУТАМ
@@ -152,7 +160,7 @@ function startGame(){
 
   // ФУНКЦИЯ ДЛЯ УДАЛЕНИЕ ПОДРЯД ИДУЩИХ БЛОКОВ
 
-    function drawBoom() {
+    function boom() {
       var arr, size,block,t1, k=5;
       // ОТКЛЮЧАЕМ ОБРАБОТКУ СОБЫТИЯ ПО КЛИКУ МЫШИ
       document.removeEventListener("click", onClick);
@@ -163,6 +171,10 @@ function startGame(){
         document.addEventListener("click", onClick);
         return;
       }
+	  audioScore = new Audio();
+	  audioScore.src = 'music/score.mp3';
+	  audioScore.play();
+    audioScore.volume = 1;
       // ДОБАВЛЯЕМ ОЧКИ
       s += arr.length;
       document.getElementsByClassName("score")[0].innerHTML = "Score:   " + s;
@@ -224,7 +236,7 @@ function startGame(){
         }
       }
       // ПРОВЕРЯЕМ, ЕСТЬ ЛИ ПОСЛЕ СОЗДАНИЯ НОВЫХ БЛОКОВ, НОВЫЕ ПОДРЯД ИДУЩИЕ БЛОКИ
-      return drawBoom();
+      return boom();
     };
 
     // ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ДЕЙТСВИЙ ИГРОКА ВО ВРЕМЯ ИГРЫ
@@ -270,7 +282,7 @@ function startGame(){
               // ЕСЛИ НАШЛОСЬ ТРИ ИЛИ БОЛЕЕ ПОДРЯД ИДУЩИХ БЛОКОВ
               if (check) {
                 firstClick = false;
-                drawBoom();
+                boom();
                 return;
               }
               // ОБРАТНО МЕНЯЕМ БЛОКИ МЕСТАМИ
@@ -292,6 +304,14 @@ function startGame(){
       var t = Date.parse(endtime) - Date.parse(new Date());
       var seconds = Math.floor((t / 1000) % 60);
       var minutes = Math.floor(t / 1000 / 60);
+	  if(seconds==10){
+		  audio.volume = 0.2;
+		  audioTimer = new Audio();
+		  audioTimer.src = 'music/timer.mp3';
+		  audioTimer.play();
+		  audioTimer.loop = true;
+      audioTimer.volume = 0.7;
+	  }
       return {
         total: t,
         minutes: minutes,
@@ -310,6 +330,7 @@ function startGame(){
       function updateClock() {
         var t = getTimeRemaining(endtime);
         if (t.total < 0) {
+			    audioTimer.pause();
           clearInterval(timeinterval);
           clearInterval(boomInterval);
           printRecords(records(true));
@@ -317,6 +338,7 @@ function startGame(){
           overlay.style.display='block';
           button.style.display='block';
           document.getElementsByClassName('game')[0].remove();
+		      audio.pause();
           return true;
         }
         minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
@@ -350,8 +372,7 @@ function startGame(){
       };
       // ФУНКЦИЯ ВВОДА ИМЕНИ ИГРОКА
       function inputNamePlayer(){
-        alert("Ваш результат попал в таблицу рекордов");
-        player = prompt("Как вас зовут?");
+        player = prompt("Поздравляем, ваш результат попал в таблицу рекордов! Как вас зовут?");
         if(player!=null){
           nick = player.split(" ");
         }
@@ -360,8 +381,7 @@ function startGame(){
         }
         if(nick.length>1){
           while(nick.length>1){
-            alert("Необходимо ввести только ваше имя!");
-            player = prompt("Введите ваше имя. Например \"Илья\" ");
+            player = prompt("Необходимо ввести только ваше имя! Например \"Илья\" ");
             if(player!=null){
               nick = player.split(" ");
             }
